@@ -8,40 +8,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700;900&family=Outfit:wght@300;600;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --sky: #0ea5e9;
-    --sky-dark: #0284c7;
-    --sky-light: #e0f2fe;
-    --night: #0f172a;
-    --slate: #64748b;
-    --surface: #f8fafc;
-    --white: #ffffff;
-    --danger: #f43f5e;
-    --success: #10b981;
-    --archive: #8b5cf6;
-    --archive-light: #ede9fe;
+    --sky: #0ea5e9; --sky-dark: #0284c7; --sky-light: #e0f2fe;
+    --night: #0f172a; --slate: #64748b; --surface: #f8fafc;
+    --white: #ffffff; --danger: #f43f5e; --success: #10b981;
+    --archive: #8b5cf6; --archive-light: #ede9fe;
+    --map: #059669; --map-light: #d1fae5;
     --radius: 18px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   body {
     font-family: 'Zen Kaku Gothic New', sans-serif;
     background: linear-gradient(135deg, #e0f2fe 0%, #bfdbfe 50%, #ddd6fe 100%);
-    min-height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    padding: 12px;
+    min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 12px;
   }
   #app {
-    width: 100%; max-width: 420px; min-height: 92vh;
-    background: var(--white); border-radius: 32px;
-    box-shadow: 0 32px 80px rgba(14,165,233,0.18), 0 8px 32px rgba(0,0,0,0.08);
+    width: 100%; max-width: 420px; min-height: 92vh; background: var(--white);
+    border-radius: 32px; box-shadow: 0 32px 80px rgba(14,165,233,0.18), 0 8px 32px rgba(0,0,0,0.08);
     overflow: hidden; display: flex; flex-direction: column; position: relative;
   }
   #syncBadge {
-    position: absolute; top: 14px; right: 16px;
-    font-size: 9px; font-family: 'Outfit', sans-serif; font-weight: 600;
+    position: absolute; top: 14px; right: 16px; font-size: 9px;
+    font-family: 'Outfit', sans-serif; font-weight: 600;
     background: rgba(16,185,129,0.15); color: var(--success);
     padding: 3px 10px; border-radius: 20px; z-index: 100; letter-spacing: 0.05em;
   }
-
   /* HOME */
   #homeScreen { display: flex; flex-direction: column; height: 100%; }
   .home-header {
@@ -52,328 +42,166 @@
     content: '✈️'; position: absolute; font-size: 120px;
     right: -20px; top: -20px; opacity: 0.12; transform: rotate(-20deg);
   }
-  .home-header h1 {
-    font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 30px;
-    color: white; letter-spacing: -0.5px; line-height: 1.1;
-  }
-  .home-header p { font-size: 13px; color: rgba(255,255,255,0.75); margin-top: 6px; font-weight: 300; }
+  .home-header h1 { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 30px; color: white; letter-spacing: -0.5px; }
   .home-body { padding: 24px 20px; flex: 1; overflow-y: auto; }
   .btn-primary {
-    width: 100%;
-    background: linear-gradient(135deg, var(--sky) 0%, #6366f1 100%);
+    width: 100%; background: linear-gradient(135deg, var(--sky) 0%, #6366f1 100%);
     color: white; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 16px;
     padding: 16px; border: none; border-radius: var(--radius); cursor: pointer;
-    letter-spacing: 0.02em; box-shadow: 0 6px 20px rgba(14,165,233,0.35);
-    transition: transform 0.12s, box-shadow 0.12s;
+    box-shadow: 0 6px 20px rgba(14,165,233,0.35); transition: transform 0.12s;
   }
-  .btn-primary:active { transform: scale(0.97); box-shadow: 0 2px 8px rgba(14,165,233,0.2); }
-
-  /* Section headers */
-  .section-header {
-    display: flex; align-items: center; gap: 8px;
-    margin: 20px 0 10px;
-  }
-  .section-title {
-    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 12px;
-    letter-spacing: 0.1em; text-transform: uppercase;
-  }
-  .section-title.active { color: var(--sky); }
-  .section-title.archive { color: var(--archive); }
+  .btn-primary:active { transform: scale(0.97); }
+  .section-header { display: flex; align-items: center; gap: 8px; margin: 20px 0 10px; }
+  .section-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .section-title.active { color: var(--sky); } .section-title.archive { color: var(--archive); }
   .section-line { flex: 1; height: 1px; background: #e2e8f0; }
-
-  /* Archive toggle */
-  .archive-toggle {
-    background: none; border: none; cursor: pointer;
-    font-size: 11px; font-family: 'Outfit', sans-serif; font-weight: 700;
-    color: var(--archive); padding: 3px 10px;
-    background: var(--archive-light); border-radius: 20px;
-    transition: all 0.15s; white-space: nowrap;
-  }
-  .archive-toggle:active { opacity: 0.7; }
-
+  .archive-toggle { background: var(--archive-light); border: none; cursor: pointer; font-size: 11px; font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--archive); padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
   #tripList, #archiveList { display: flex; flex-direction: column; gap: 10px; }
-
-  /* Trip cards */
-  .trip-card {
-    background: var(--surface); border: 1.5px solid #e2e8f0;
-    border-radius: var(--radius); padding: 16px 14px;
-    display: flex; justify-content: space-between; align-items: center;
-    transition: all 0.15s;
-  }
+  .trip-card { background: var(--surface); border: 1.5px solid #e2e8f0; border-radius: var(--radius); padding: 16px 14px; display: flex; justify-content: space-between; align-items: center; transition: all 0.15s; }
   .trip-card:active { background: var(--sky-light); border-color: var(--sky); }
   .trip-card.archived { background: #faf5ff; border-color: #ddd6fe; opacity: 0.85; }
-  .trip-card.archived:active { background: var(--archive-light); border-color: var(--archive); }
   .trip-card-name { font-weight: 700; font-size: 15px; color: var(--night); }
   .trip-card.archived .trip-card-name { color: var(--archive); }
   .trip-card-date { font-size: 11px; color: var(--slate); margin-top: 3px; }
-  .trip-card-badge {
-    font-size: 9px; font-family: 'Outfit', sans-serif; font-weight: 700;
-    padding: 2px 7px; border-radius: 10px; margin-top: 4px; display: inline-block;
-  }
+  .trip-card-badge { font-size: 9px; font-family: 'Outfit', sans-serif; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-top: 4px; display: inline-block; }
   .badge-archive { background: var(--archive-light); color: var(--archive); }
   .trip-card-actions { display: flex; align-items: center; gap: 4px; }
-  .trip-archive-btn {
-    background: none; border: none; font-size: 15px;
-    padding: 4px 6px; cursor: pointer; line-height: 1;
-    color: #cbd5e1; transition: color 0.15s;
-  }
-  .trip-archive-btn:hover { color: var(--archive); }
-  .trip-unarchive-btn {
-    background: none; border: none; font-size: 13px;
-    padding: 4px 6px; cursor: pointer; line-height: 1;
-    color: #c4b5fd; transition: color 0.15s;
-  }
-  .trip-unarchive-btn:hover { color: var(--archive); }
-  .trip-delete-btn {
-    background: none; border: none; color: #cbd5e1; font-size: 18px;
-    padding: 4px 6px; cursor: pointer; line-height: 1; transition: color 0.15s;
-  }
-  .trip-delete-btn:hover { color: var(--danger); }
-
+  .trip-archive-btn, .trip-unarchive-btn, .trip-delete-btn { background: none; border: none; font-size: 15px; padding: 4px 6px; cursor: pointer; line-height: 1; }
+  .trip-archive-btn { color: #cbd5e1; } .trip-unarchive-btn { color: #c4b5fd; } .trip-delete-btn { color: #cbd5e1; font-size: 18px; }
   /* DETAIL */
   #detailScreen { display: none; flex-direction: column; height: 100%; }
   #detailScreen.visible { display: flex; }
-  .detail-header {
-    background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
-    padding: 16px 16px 12px; display: flex; align-items: center; gap: 10px;
-  }
-  .detail-header.archived-header {
-    background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
-  }
-  .back-btn {
-    background: rgba(255,255,255,0.2); border: none; color: white;
-    font-size: 12px; font-weight: 700; padding: 8px 12px; border-radius: 12px;
-    cursor: pointer; white-space: nowrap; transition: background 0.15s;
-  }
-  .back-btn:active { background: rgba(255,255,255,0.35); }
-  #displayTripName {
-    flex: 1; text-align: center; font-family: 'Outfit', sans-serif;
-    font-weight: 700; font-size: 15px; color: white;
-    overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
-  }
-  .trip-meta {
-    background: white; padding: 10px 16px; border-bottom: 1px solid #f1f5f9;
-    display: flex; justify-content: space-between; align-items: center; gap: 8px;
-  }
+  .detail-header { background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%); padding: 16px 16px 12px; display: flex; align-items: center; gap: 10px; }
+  .detail-header.archived-header { background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%); }
+  .back-btn { background: rgba(255,255,255,0.2); border: none; color: white; font-size: 12px; font-weight: 700; padding: 8px 12px; border-radius: 12px; cursor: pointer; white-space: nowrap; }
+  #displayTripName { flex: 1; text-align: center; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 15px; color: white; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .trip-meta { background: white; padding: 10px 16px; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
   #tripDateRange { font-size: 11px; color: var(--slate); font-weight: 700; }
   .meta-actions { display: flex; gap: 6px; }
-  .edit-btn {
-    background: var(--sky-light); color: var(--sky-dark); border: none;
-    font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 10px;
-    cursor: pointer; transition: background 0.15s; white-space: nowrap;
-  }
-  .edit-btn:active { background: #bae6fd; }
-  .archive-btn-detail {
-    background: var(--archive-light); color: var(--archive); border: none;
-    font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 10px;
-    cursor: pointer; transition: background 0.15s; white-space: nowrap;
-  }
-  .archive-btn-detail:active { background: #ddd6fe; }
-
-  .tabs-wrapper {
-    background: white; border-bottom: 1px solid #f1f5f9;
-    display: flex; align-items: center; padding-right: 8px;
-    position: sticky; top: 0; z-index: 10;
-  }
+  .edit-btn { background: var(--sky-light); color: var(--sky-dark); border: none; font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 10px; cursor: pointer; white-space: nowrap; }
+  .archive-btn-detail { background: var(--archive-light); color: var(--archive); border: none; font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 10px; cursor: pointer; white-space: nowrap; }
+  .tabs-wrapper { background: white; border-bottom: 1px solid #f1f5f9; display: flex; align-items: center; padding-right: 8px; position: sticky; top: 0; z-index: 10; }
   #dayTabs { display: flex; overflow-x: auto; flex: 1; scrollbar-width: none; }
   #dayTabs::-webkit-scrollbar { display: none; }
-  .day-tab {
-    flex-shrink: 0; padding: 12px 20px; font-size: 11px;
-    font-family: 'Outfit', sans-serif; font-weight: 600;
-    color: var(--slate); border: none; background: none;
-    cursor: pointer; border-bottom: 3px solid transparent;
-    transition: all 0.15s; letter-spacing: 0.05em;
-  }
-  .day-tab.active {
-    color: var(--sky); border-bottom-color: var(--sky);
-    background: linear-gradient(to bottom, transparent, var(--sky-light));
-  }
-  .add-day-btn {
-    background: var(--sky); color: white; border: none;
-    width: 28px; height: 28px; border-radius: 50%; font-size: 18px;
-    cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    transition: transform 0.15s, background 0.15s;
-  }
-  .add-day-btn:active { transform: scale(0.9); background: var(--sky-dark); }
+  .day-tab { flex-shrink: 0; padding: 8px 14px; font-size: 10px; font-family: 'Outfit', sans-serif; font-weight: 600; color: var(--slate); border: none; background: none; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.15s; text-align: center; line-height: 1.3; }
+  .day-tab.active { color: var(--sky); border-bottom-color: var(--sky); background: linear-gradient(to bottom, transparent, var(--sky-light)); }
+  .day-tab-label { font-size: 10px; font-weight: 700; }
+  .day-tab-date { font-size: 9px; opacity: 0.8; }
+  .day-tab.active .day-tab-date { color: var(--sky); opacity: 1; }
+  .add-day-btn { background: var(--sky); color: white; border: none; width: 28px; height: 28px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .add-day-btn:active { transform: scale(0.9); }
+  .day-date-bar { background: white; padding: 6px 16px; border-bottom: 1px solid #f1f5f9; font-size: 11px; color: var(--slate); font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .day-date-edit-btn { background: none; border: none; font-size: 11px; color: var(--sky); cursor: pointer; font-weight: 700; }
   .detail-content { flex: 1; overflow-y: auto; padding: 16px; background: var(--surface); }
-
-  /* Archived notice in detail */
-  .archived-notice {
-    background: var(--archive-light); border: 1px solid #ddd6fe;
-    border-radius: 14px; padding: 12px 16px; margin-bottom: 16px;
-    text-align: center; font-size: 12px; color: var(--archive); font-weight: 700;
-  }
-
-  /* Input form */
-  .input-card {
-    background: white; border-radius: var(--radius);
-    border: 1.5px solid var(--sky-light); padding: 16px; margin-bottom: 20px;
-    box-shadow: 0 2px 12px rgba(14,165,233,0.07);
-  }
+  .archived-notice { background: var(--archive-light); border: 1px solid #ddd6fe; border-radius: 14px; padding: 12px 16px; margin-bottom: 16px; text-align: center; font-size: 12px; color: var(--archive); font-weight: 700; }
+  /* INPUT FORM */
+  .input-card { background: white; border-radius: var(--radius); border: 1.5px solid var(--sky-light); padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(14,165,233,0.07); }
   .input-row { display: flex; gap: 8px; margin-bottom: 8px; }
-  .input-time {
-    width: 38%; padding: 10px; border: 1.5px solid #e2e8f0; border-radius: 12px;
-    background: var(--surface); font-family: 'Outfit', sans-serif; font-size: 14px;
-    color: var(--night); outline: none; transition: border-color 0.15s;
-  }
+  .input-time { width: 38%; padding: 10px; border: 1.5px solid #e2e8f0; border-radius: 12px; background: var(--surface); font-family: 'Outfit', sans-serif; font-size: 14px; color: var(--night); outline: none; }
   .input-time:focus { border-color: var(--sky); }
-  .input-text {
-    flex: 1; padding: 10px; border: 1.5px solid #e2e8f0; border-radius: 12px;
-    background: var(--surface); font-family: 'Zen Kaku Gothic New', sans-serif;
-    font-size: 14px; color: var(--night); outline: none; transition: border-color 0.15s;
-  }
+  .input-text { flex: 1; padding: 10px; border: 1.5px solid #e2e8f0; border-radius: 12px; background: var(--surface); font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 14px; color: var(--night); outline: none; }
   .input-text:focus { border-color: var(--sky); }
-  .input-memo {
-    width: 100%; padding: 10px; border: 1.5px solid #e2e8f0; border-radius: 12px;
-    background: var(--surface); font-family: 'Zen Kaku Gothic New', sans-serif;
-    font-size: 13px; color: var(--night); outline: none; resize: none; margin-bottom: 10px;
-    transition: border-color 0.15s;
-  }
+  .input-url { width: 100%; padding: 9px 10px; border: 1.5px solid #e2e8f0; border-radius: 12px; background: var(--surface); font-family: 'Outfit', sans-serif; font-size: 12px; color: var(--night); outline: none; margin-bottom: 8px; }
+  .input-url:focus { border-color: var(--sky); }
+  .input-map { width: 100%; padding: 9px 10px; border: 1.5px solid #e2e8f0; border-radius: 12px; background: var(--surface); font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 12px; color: var(--night); outline: none; margin-bottom: 8px; }
+  .input-map:focus { border-color: var(--map); }
+  .input-memo { width: 100%; padding: 10px; border: 1.5px solid #e2e8f0; border-radius: 12px; background: var(--surface); font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 13px; color: var(--night); outline: none; resize: none; margin-bottom: 10px; }
   .input-memo:focus { border-color: var(--sky); }
-  .btn-add {
-    width: 100%; background: var(--sky); color: white; border: none;
-    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px;
-    padding: 12px; border-radius: 12px; cursor: pointer;
-    letter-spacing: 0.05em; transition: all 0.12s;
-    box-shadow: 0 4px 12px rgba(14,165,233,0.3);
-  }
+  .input-section-label { font-size: 10px; font-weight: 700; color: var(--slate); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; display: block; }
+  .btn-add { width: 100%; background: var(--sky); color: white; border: none; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px; padding: 12px; border-radius: 12px; cursor: pointer; box-shadow: 0 4px 12px rgba(14,165,233,0.3); }
   .btn-add:active { transform: scale(0.98); background: var(--sky-dark); }
-
-  /* Timeline */
-  #planList {
-    position: relative; padding-left: 28px;
-    border-left: 2px solid var(--sky-light); margin-left: 8px;
-  }
+  /* TIMELINE */
+  #planList { position: relative; padding-left: 28px; border-left: 2px solid var(--sky-light); margin-left: 8px; }
   .plan-item { position: relative; margin-bottom: 16px; animation: fadeIn 0.3s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; } }
-  .plan-dot {
-    position: absolute; left: -37px; top: 14px;
-    width: 14px; height: 14px; background: var(--sky);
-    border-radius: 50%; border: 2px solid white;
-    box-shadow: 0 0 0 2px var(--sky-light);
-  }
-  .plan-card {
-    background: white; border-radius: 14px; padding: 12px 14px;
-    border: 1px solid #f1f5f9; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;
-  }
+  .plan-dot { position: absolute; left: -37px; top: 14px; width: 14px; height: 14px; background: var(--sky); border-radius: 50%; border: 2px solid white; box-shadow: 0 0 0 2px var(--sky-light); }
+  .plan-card { background: white; border-radius: 14px; padding: 12px 14px; border: 1px solid #f1f5f9; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .plan-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
   .plan-time { font-family: 'Outfit', sans-serif; font-size: 10px; font-weight: 700; color: var(--sky); letter-spacing: 0.08em; }
   .plan-task { font-weight: 700; font-size: 14px; color: var(--night); margin-top: 2px; }
-  .plan-memo { font-size: 11px; color: var(--slate); margin-top: 3px; word-break: break-all; }
-  .plan-delete {
-    background: none; border: none; color: #cbd5e1; font-size: 16px;
-    cursor: pointer; padding: 2px 4px; line-height: 1; flex-shrink: 0;
-    transition: color 0.15s;
-  }
+  .plan-actions { display: flex; gap: 4px; flex-shrink: 0; }
+  .plan-edit-btn { background: var(--sky-light); border: none; color: var(--sky-dark); font-size: 12px; padding: 4px 8px; border-radius: 8px; cursor: pointer; font-weight: 700; }
+  .plan-delete { background: none; border: none; color: #cbd5e1; font-size: 16px; cursor: pointer; padding: 2px 4px; line-height: 1; }
   .plan-delete:hover { color: var(--danger); }
-  .day-footer {
-    margin-top: 24px; padding-top: 16px; border-top: 1px dashed #e2e8f0;
-    text-align: center; padding-bottom: 32px;
+  /* Plan links row */
+  .plan-links { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+  .plan-link-btn {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 20px;
+    border: none; cursor: pointer; text-decoration: none; font-family: 'Outfit', sans-serif;
+    transition: opacity 0.15s;
   }
-  .delete-day-btn {
-    background: none; border: none; color: #fca5a5;
-    font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
-    cursor: pointer; text-transform: uppercase; transition: color 0.15s;
-  }
-  .delete-day-btn:hover { color: var(--danger); }
-
+  .plan-link-btn:active { opacity: 0.7; }
+  .plan-link-url { background: #eff6ff; color: #3b82f6; }
+  .plan-link-map { background: var(--map-light); color: var(--map); }
+  /* Memo accordion */
+  .plan-memo-toggle { background: none; border: none; font-size: 11px; color: var(--slate); cursor: pointer; padding: 4px 0; display: flex; align-items: center; gap: 4px; font-family: 'Zen Kaku Gothic New', sans-serif; margin-top: 4px; }
+  .plan-memo-toggle-icon { transition: transform 0.2s; display: inline-block; font-size: 9px; }
+  .plan-memo-toggle-icon.open { transform: rotate(90deg); }
+  .plan-memo-body { font-size: 12px; color: var(--slate); margin-top: 4px; word-break: break-all; line-height: 1.6; display: none; padding: 8px; background: var(--surface); border-radius: 8px; }
+  .plan-memo-body.open { display: block; }
+  .day-footer { margin-top: 24px; padding-top: 16px; border-top: 1px dashed #e2e8f0; text-align: center; padding-bottom: 32px; }
+  .delete-day-btn { background: none; border: none; color: #fca5a5; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; cursor: pointer; text-transform: uppercase; }
   .loading { text-align: center; padding: 40px; color: var(--slate); font-size: 13px; }
   .empty-state { text-align: center; padding: 40px 24px; color: #94a3b8; }
   .empty-state .icon { font-size: 40px; margin-bottom: 10px; }
   .empty-state p { font-size: 13px; }
-
+  #archiveList { display: none; } #archiveList.open { display: flex; }
   /* MODAL */
-  .modal-overlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(15,23,42,0.55); z-index: 200;
-    align-items: flex-end; justify-content: center; backdrop-filter: blur(4px);
-  }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.55); z-index: 200; align-items: flex-end; justify-content: center; backdrop-filter: blur(4px); }
   .modal-overlay.open { display: flex; }
-  .modal-sheet {
-    background: white; width: 100%; max-width: 420px;
-    border-radius: 28px 28px 0 0; padding: 28px 24px 44px;
-    animation: slideUp 0.28s cubic-bezier(0.34,1.56,0.64,1);
-  }
+  .modal-sheet { background: white; width: 100%; max-width: 420px; border-radius: 28px 28px 0 0; padding: 28px 24px 44px; animation: slideUp 0.28s cubic-bezier(0.34,1.56,0.64,1); max-height: 90vh; overflow-y: auto; }
   @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
   .modal-handle { width: 40px; height: 4px; background: #e2e8f0; border-radius: 4px; margin: 0 auto 20px; }
-  .modal-title {
-    font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 20px;
-    color: var(--night); margin-bottom: 22px;
-  }
-  .modal-label {
-    font-size: 10px; font-weight: 700; color: var(--slate);
-    letter-spacing: 0.1em; text-transform: uppercase;
-    margin-bottom: 6px; display: block;
-  }
-  .modal-input {
-    width: 100%; padding: 13px 14px; border: 1.5px solid #e2e8f0; border-radius: 14px;
-    font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 15px; color: var(--night);
-    outline: none; margin-bottom: 18px; transition: border-color 0.15s; background: var(--surface);
-  }
+  .modal-title { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 20px; color: var(--night); margin-bottom: 22px; }
+  .modal-label { font-size: 10px; font-weight: 700; color: var(--slate); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; display: block; }
+  .modal-input { width: 100%; padding: 13px 14px; border: 1.5px solid #e2e8f0; border-radius: 14px; font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 15px; color: var(--night); outline: none; margin-bottom: 18px; background: var(--surface); }
   .modal-input:focus { border-color: var(--sky); background: white; }
+  .modal-input-url { width: 100%; padding: 13px 14px; border: 1.5px solid #e2e8f0; border-radius: 14px; font-family: 'Outfit', sans-serif; font-size: 13px; color: var(--night); outline: none; margin-bottom: 18px; background: var(--surface); }
+  .modal-input-url:focus { border-color: #3b82f6; background: white; }
+  .modal-input-map { width: 100%; padding: 13px 14px; border: 1.5px solid #e2e8f0; border-radius: 14px; font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 13px; color: var(--night); outline: none; margin-bottom: 18px; background: var(--surface); }
+  .modal-input-map:focus { border-color: var(--map); background: white; }
   .modal-date-row { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
-  .modal-date-input {
-    flex: 1; padding: 13px 10px; border: 1.5px solid #e2e8f0; border-radius: 14px;
-    font-family: 'Outfit', sans-serif; font-size: 14px; color: var(--night);
-    outline: none; transition: border-color 0.15s; background: var(--surface); text-align: center;
-  }
+  .modal-date-input { flex: 1; padding: 13px 10px; border: 1.5px solid #e2e8f0; border-radius: 14px; font-family: 'Outfit', sans-serif; font-size: 14px; color: var(--night); outline: none; background: var(--surface); text-align: center; }
   .modal-date-input:focus { border-color: var(--sky); background: white; }
   .modal-date-sep { font-size: 20px; color: #94a3b8; font-weight: 700; flex-shrink: 0; }
   .modal-btn-row { display: flex; gap: 10px; margin-top: 6px; }
-  .modal-cancel {
-    flex: 1; padding: 14px; border: 1.5px solid #e2e8f0; border-radius: 14px;
-    background: white; font-family: 'Outfit', sans-serif; font-weight: 700;
-    font-size: 14px; color: var(--slate); cursor: pointer; transition: background 0.15s;
-  }
-  .modal-cancel:active { background: var(--surface); }
-  .modal-confirm {
-    flex: 2; padding: 14px; border: none; border-radius: 14px;
-    background: linear-gradient(135deg, var(--sky) 0%, #6366f1 100%);
-    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px; color: white;
-    cursor: pointer; box-shadow: 0 4px 14px rgba(14,165,233,0.3);
-    transition: all 0.12s;
-  }
+  .modal-cancel { flex: 1; padding: 14px; border: 1.5px solid #e2e8f0; border-radius: 14px; background: white; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px; color: var(--slate); cursor: pointer; }
+  .modal-confirm { flex: 2; padding: 14px; border: none; border-radius: 14px; background: linear-gradient(135deg, var(--sky) 0%, #6366f1 100%); font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px; color: white; cursor: pointer; box-shadow: 0 4px 14px rgba(14,165,233,0.3); }
   .modal-confirm:active { transform: scale(0.97); }
-
-  /* Archive section collapsible */
-  #archiveSection { margin-top: 4px; }
-  #archiveList { display: none; }
-  #archiveList.open { display: flex; }
+  .modal-time-row { display: flex; gap: 8px; margin-bottom: 10px; }
+  .modal-time-input { width: 38%; padding: 13px 10px; border: 1.5px solid #e2e8f0; border-radius: 14px; font-family: 'Outfit', sans-serif; font-size: 14px; color: var(--night); outline: none; background: var(--surface); }
+  .modal-time-input:focus { border-color: var(--sky); background: white; }
+  .modal-text-input { flex: 1; padding: 13px 14px; border: 1.5px solid #e2e8f0; border-radius: 14px; font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 14px; color: var(--night); outline: none; background: var(--surface); }
+  .modal-text-input:focus { border-color: var(--sky); background: white; }
+  .modal-textarea { width: 100%; padding: 13px 14px; border: 1.5px solid #e2e8f0; border-radius: 14px; font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 13px; color: var(--night); outline: none; resize: none; margin-bottom: 18px; background: var(--surface); }
+  .modal-textarea:focus { border-color: var(--sky); background: white; }
+  .modal-hint { font-size: 10px; color: #94a3b8; margin-top: -14px; margin-bottom: 14px; }
 </style>
 </head>
 <body>
 <div id="app">
   <div id="syncBadge">🔄 同期中</div>
-
   <!-- HOME -->
   <div id="homeScreen">
-    <div class="home-header">
-      <h1>旅の計画 ✈️</h1>
-    </div>
+    <div class="home-header"><h1>旅の計画 ✈️</h1></div>
     <div class="home-body">
       <button class="btn-primary" onclick="openCreateModal()">＋ 新しい旅行を作成</button>
-
-      <!-- Active trips -->
       <div class="section-header">
         <span class="section-title active">📍 予定中の旅行</span>
         <div class="section-line"></div>
       </div>
       <div id="tripList"><div class="loading">読み込み中...</div></div>
-
-      <!-- Archive -->
       <div id="archiveSection">
         <div class="section-header">
           <span class="section-title archive">📦 アーカイブ</span>
           <div class="section-line"></div>
-          <button class="archive-toggle" onclick="toggleArchive()">
-            <span id="archiveToggleLabel">表示</span>
-          </button>
+          <button class="archive-toggle" onclick="toggleArchive()"><span id="archiveToggleLabel">表示</span></button>
         </div>
         <div id="archiveList"></div>
       </div>
     </div>
   </div>
-
   <!-- DETAIL -->
   <div id="detailScreen">
     <div class="detail-header" id="detailHeader">
@@ -392,17 +220,24 @@
       <div id="dayTabs"></div>
       <button class="add-day-btn" id="addDayBtn" onclick="addNewDay()">＋</button>
     </div>
+    <div id="dayDateBar" class="day-date-bar" style="display:none">
+      <span id="dayDateLabel">📅 日付未設定</span>
+      <button class="day-date-edit-btn" id="dayDateEditBtn" onclick="openDayDateModal()">変更</button>
+    </div>
     <div class="detail-content">
-      <div id="archivedNotice" class="archived-notice" style="display:none">
-        📦 アーカイブ済みの旅行です（読み取り専用）
-      </div>
+      <div id="archivedNotice" class="archived-notice" style="display:none">📦 アーカイブ済みの旅行です（読み取り専用）</div>
       <div id="inputFormWrapper">
         <div class="input-card">
           <div class="input-row">
             <input type="time" id="planTime" class="input-time">
             <input type="text" id="planTask" placeholder="場所・予定" class="input-text">
           </div>
-          <textarea id="planMemo" rows="2" placeholder="メモ・URL（任意）" class="input-memo"></textarea>
+          <span class="input-section-label">🔗 URL（任意）</span>
+          <input type="url" id="planUrl" class="input-url" placeholder="https://...">
+          <span class="input-section-label">🗺️ 地図（場所名またはGoogleマップURL）</span>
+          <input type="text" id="planMap" class="input-map" placeholder="例：東京スカイツリー">
+          <span class="input-section-label">📝 メモ（任意）</span>
+          <textarea id="planMemo" rows="2" class="input-memo" placeholder="メモ・備考など"></textarea>
           <button class="btn-add" onclick="addPlan()">＋ 予定を追加</button>
         </div>
       </div>
@@ -434,7 +269,7 @@
   </div>
 </div>
 
-<!-- EDIT MODAL -->
+<!-- EDIT TRIP MODAL -->
 <div class="modal-overlay" id="editModal">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -454,10 +289,46 @@
   </div>
 </div>
 
+<!-- EDIT PLAN MODAL -->
+<div class="modal-overlay" id="editPlanModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title">✏️ 予定を編集</div>
+    <label class="modal-label">時間と場所・予定</label>
+    <div class="modal-time-row">
+      <input type="time" id="editPlanTime" class="modal-time-input">
+      <input type="text" id="editPlanTask" placeholder="場所・予定" class="modal-text-input">
+    </div>
+    <label class="modal-label">🔗 URL</label>
+    <input type="url" id="editPlanUrl" class="modal-input-url" placeholder="https://...">
+    <label class="modal-label">🗺️ 地図（場所名またはGoogleマップURL）</label>
+    <input type="text" id="editPlanMap" class="modal-input-map" placeholder="例：東京スカイツリー">
+    <label class="modal-label">📝 メモ</label>
+    <textarea id="editPlanMemo" rows="3" class="modal-textarea" placeholder="メモ・備考など"></textarea>
+    <div class="modal-btn-row">
+      <button class="modal-cancel" onclick="closeModal('editPlanModal')">キャンセル</button>
+      <button class="modal-confirm" onclick="confirmEditPlan()">保存する</button>
+    </div>
+  </div>
+</div>
+
+<!-- DAY DATE MODAL -->
+<div class="modal-overlay" id="dayDateModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title">📅 この日の日付</div>
+    <label class="modal-label">日付</label>
+    <input type="date" id="dayDateInput" class="modal-input">
+    <div class="modal-btn-row">
+      <button class="modal-cancel" onclick="closeModal('dayDateModal')">キャンセル</button>
+      <button class="modal-confirm" onclick="confirmDayDate()">保存する</button>
+    </div>
+  </div>
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script>
-// ===== Firebase =====
 const firebaseConfig = {
   apiKey: "AIzaSyB3LPhjOLNAzvUgIPHlAkBVd3ZOQb_La74",
   authDomain: "travelapp1-3975c.firebaseapp.com",
@@ -471,7 +342,7 @@ const db = firebase.firestore();
 
 let currentTripId = null, currentDayIdx = 0, currentTripData = null;
 let unsubscribeTrips = null, unsubscribeDetail = null;
-let archiveOpen = false;
+let archiveOpen = false, editingPlanIdx = null;
 
 // ===== MODAL =====
 function openModal(id) { document.getElementById(id).classList.add('open'); }
@@ -480,6 +351,30 @@ document.querySelectorAll('.modal-overlay').forEach(el => {
   el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); });
 });
 
+// ===== HELPERS =====
+function formatDateRange(start, end) {
+  const fmt = d => { if (!d) return ''; const [y,m,day] = d.split('-'); return `${parseInt(m)}/${parseInt(day)}`; };
+  if (start && end) return `${fmt(start)} 〜 ${fmt(end)}`;
+  if (start) return `${fmt(start)}〜`;
+  return '期間未設定';
+}
+function formatDateJa(dateStr) {
+  if (!dateStr) return '日付未設定';
+  const [y,m,d] = dateStr.split('-');
+  const dow = ['日','月','火','水','木','金','土'][new Date(dateStr).getDay()];
+  return `${parseInt(m)}月${parseInt(d)}日（${dow}）`;
+}
+function buildMapUrl(mapVal) {
+  if (!mapVal) return null;
+  if (mapVal.startsWith('http')) return mapVal;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapVal)}`;
+}
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ===== CREATE TRIP =====
 function openCreateModal() {
   document.getElementById('newTripName').value = '';
   document.getElementById('newTripDateStart').value = '';
@@ -487,40 +382,31 @@ function openCreateModal() {
   openModal('createModal');
   setTimeout(() => document.getElementById('newTripName').focus(), 100);
 }
-
-function formatDateRange(start, end) {
-  const fmt = d => { if (!d) return ''; const [y,m,day] = d.split('-'); return `${parseInt(m)}/${parseInt(day)}`; };
-  if (start && end) return `${fmt(start)} 〜 ${fmt(end)}`;
-  if (start) return `${fmt(start)}〜`;
-  return '期間未設定';
-}
-
 async function confirmCreateTrip() {
   const name = document.getElementById('newTripName').value.trim();
   if (!name) { document.getElementById('newTripName').focus(); return; }
   const start = document.getElementById('newTripDateStart').value;
   const end = document.getElementById('newTripDateEnd').value;
   closeModal('createModal');
-  setSyncBadge('⏳ 保存中', 'yellow');
+  setSyncBadge('⏳ 保存中','yellow');
   try {
     await db.collection("trips").add({
       name, dateRange: formatDateRange(start, end),
-      startDate: start || '', endDate: end || '',
-      archived: false,
+      startDate: start||'', endDate: end||'', archived: false,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      days: [{ title: 'DAY 1', plans: [] }]
+      days: [{ title:'DAY 1', date: start||'', plans:[] }]
     });
-    setSyncBadge('✅ 同期済', 'green');
+    setSyncBadge('✅ 同期済','green');
   } catch(e) { alert("保存に失敗: "+e.message); setSyncBadge('⚠️ エラー','yellow'); }
 }
 
+// ===== EDIT TRIP =====
 function openEditModal() {
-  document.getElementById('editTripNameInput').value = currentTripData.name || '';
-  document.getElementById('editTripDateStart').value = currentTripData.startDate || '';
-  document.getElementById('editTripDateEnd').value = currentTripData.endDate || '';
+  document.getElementById('editTripNameInput').value = currentTripData.name||'';
+  document.getElementById('editTripDateStart').value = currentTripData.startDate||'';
+  document.getElementById('editTripDateEnd').value = currentTripData.endDate||'';
   openModal('editModal');
 }
-
 async function confirmEditTrip() {
   const name = document.getElementById('editTripNameInput').value.trim();
   if (!name) return;
@@ -528,22 +414,62 @@ async function confirmEditTrip() {
   const end = document.getElementById('editTripDateEnd').value;
   closeModal('editModal');
   try {
-    await db.collection("trips").doc(currentTripId).update({
-      name, dateRange: formatDateRange(start, end),
-      startDate: start || '', endDate: end || ''
-    });
+    await db.collection("trips").doc(currentTripId).update({ name, dateRange: formatDateRange(start,end), startDate: start||'', endDate: end||'' });
   } catch(e) { alert("更新に失敗: "+e.message); }
+}
+
+// ===== DAY DATE =====
+function openDayDateModal() {
+  document.getElementById('dayDateInput').value = currentTripData.days[currentDayIdx].date||'';
+  openModal('dayDateModal');
+}
+async function confirmDayDate() {
+  const date = document.getElementById('dayDateInput').value;
+  closeModal('dayDateModal');
+  const newDays = JSON.parse(JSON.stringify(currentTripData.days));
+  newDays[currentDayIdx].date = date;
+  try { await db.collection("trips").doc(currentTripId).update({ days: newDays }); }
+  catch(e) { alert("更新に失敗: "+e.message); }
+}
+
+// ===== PLAN EDIT =====
+function openEditPlanModal(idx) {
+  editingPlanIdx = idx;
+  const p = currentTripData.days[currentDayIdx].plans[idx];
+  document.getElementById('editPlanTime').value = p.time||'';
+  document.getElementById('editPlanTask').value = p.task||'';
+  document.getElementById('editPlanUrl').value = p.url||'';
+  document.getElementById('editPlanMap').value = p.map||'';
+  document.getElementById('editPlanMemo').value = p.memo||'';
+  openModal('editPlanModal');
+}
+async function confirmEditPlan() {
+  const time = document.getElementById('editPlanTime').value;
+  const task = document.getElementById('editPlanTask').value.trim();
+  const url = document.getElementById('editPlanUrl').value.trim();
+  const map = document.getElementById('editPlanMap').value.trim();
+  const memo = document.getElementById('editPlanMemo').value.trim();
+  if (!time||!task) { alert("時間と予定を入力してください"); return; }
+  closeModal('editPlanModal');
+  const newDays = JSON.parse(JSON.stringify(currentTripData.days));
+  newDays[currentDayIdx].plans[editingPlanIdx] = { time, task, url, map, memo };
+  newDays[currentDayIdx].plans.sort((a,b)=>a.time.localeCompare(b.time));
+  try {
+    setSyncBadge('⏳ 保存中','yellow');
+    await db.collection("trips").doc(currentTripId).update({ days: newDays });
+    setSyncBadge('✅ 同期済','green');
+  } catch(e) { alert("保存失敗: "+e.message); setSyncBadge('⚠️ エラー','yellow'); }
 }
 
 // ===== SYNC BADGE =====
 function setSyncBadge(text, color) {
   const b = document.getElementById('syncBadge');
   b.textContent = text;
-  b.style.background = color === 'green' ? 'rgba(16,185,129,0.15)' : 'rgba(234,179,8,0.15)';
-  b.style.color = color === 'green' ? '#10b981' : '#ca8a04';
+  b.style.background = color==='green' ? 'rgba(16,185,129,0.15)' : 'rgba(234,179,8,0.15)';
+  b.style.color = color==='green' ? '#10b981' : '#ca8a04';
 }
 
-// ===== ARCHIVE TOGGLE (home) =====
+// ===== ARCHIVE =====
 function toggleArchive() {
   archiveOpen = !archiveOpen;
   document.getElementById('archiveList').classList.toggle('open', archiveOpen);
@@ -558,218 +484,208 @@ function showHome() {
   document.getElementById('detailScreen').classList.remove('visible');
   startTripListListener();
 }
-
 function startTripListListener() {
   if (unsubscribeTrips) unsubscribeTrips();
   unsubscribeTrips = db.collection("trips").orderBy("createdAt","desc").onSnapshot(snapshot => {
-    setSyncBadge('✅ 同期済', 'green');
+    setSyncBadge('✅ 同期済','green');
     const active = document.getElementById('tripList');
     const archived = document.getElementById('archiveList');
     active.innerHTML = ''; archived.innerHTML = '';
-    let activeCount = 0, archiveCount = 0;
-
+    let activeCount=0, archiveCount=0;
     snapshot.forEach(doc => {
       const trip = doc.data();
-      const isArchived = trip.archived === true;
+      const isArchived = trip.archived===true;
       const div = document.createElement('div');
-      div.className = 'trip-card' + (isArchived ? ' archived' : '');
-
+      div.className = 'trip-card'+(isArchived?' archived':'');
       if (isArchived) {
         div.innerHTML = `
           <div onclick="showDetail('${doc.id}')" style="flex:1;cursor:pointer;">
             <div class="trip-card-name">${escapeHtml(trip.name)}</div>
-            <div class="trip-card-date">${escapeHtml(trip.dateRange || '期間未設定')}</div>
+            <div class="trip-card-date">${escapeHtml(trip.dateRange||'期間未設定')}</div>
             <span class="trip-card-badge badge-archive">📦 アーカイブ済み</span>
           </div>
           <div class="trip-card-actions">
-            <button class="trip-unarchive-btn" title="アーカイブを解除" onclick="unarchiveTrip('${doc.id}',event)">↩️</button>
+            <button class="trip-unarchive-btn" onclick="unarchiveTrip('${doc.id}',event)">↩️</button>
             <button class="trip-delete-btn" onclick="deleteTrip('${doc.id}',event)">✕</button>
           </div>`;
-        archived.appendChild(div);
-        archiveCount++;
+        archived.appendChild(div); archiveCount++;
       } else {
         div.innerHTML = `
           <div onclick="showDetail('${doc.id}')" style="flex:1;cursor:pointer;">
             <div class="trip-card-name">${escapeHtml(trip.name)}</div>
-            <div class="trip-card-date">${escapeHtml(trip.dateRange || '期間未設定')}</div>
+            <div class="trip-card-date">${escapeHtml(trip.dateRange||'期間未設定')}</div>
           </div>
           <div class="trip-card-actions">
-            <button class="trip-archive-btn" title="アーカイブに移動" onclick="archiveTrip('${doc.id}',event)">📦</button>
+            <button class="trip-archive-btn" onclick="archiveTrip('${doc.id}',event)">📦</button>
             <button class="trip-delete-btn" onclick="deleteTrip('${doc.id}',event)">✕</button>
           </div>`;
-        active.appendChild(div);
-        activeCount++;
+        active.appendChild(div); activeCount++;
       }
     });
-
-    if (activeCount === 0) active.innerHTML = '<div class="empty-state"><div class="icon">🗺️</div><p>旅行がまだありません</p></div>';
-    if (archiveCount === 0) archived.innerHTML = '<div class="empty-state"><div class="icon">📭</div><p>アーカイブはありません</p></div>';
-
-    // show/hide archive section
-    document.getElementById('archiveSection').style.display = archiveCount > 0 || archiveOpen ? '' : 'none';
-  }, err => {
-    setSyncBadge('⚠️ エラー', 'yellow');
-    document.getElementById('tripList').innerHTML = '<div class="empty-state"><p>⚠️ 読み込み失敗</p></div>';
-  });
+    if (activeCount===0) active.innerHTML='<div class="empty-state"><div class="icon">🗺️</div><p>旅行がまだありません</p></div>';
+    if (archiveCount===0) archived.innerHTML='<div class="empty-state"><div class="icon">📭</div><p>アーカイブはありません</p></div>';
+    document.getElementById('archiveSection').style.display = archiveCount>0||archiveOpen ? '' : 'none';
+  }, err => { setSyncBadge('⚠️ エラー','yellow'); document.getElementById('tripList').innerHTML='<div class="empty-state"><p>⚠️ 読み込み失敗</p></div>'; });
 }
-
-async function archiveTrip(id, e) {
-  e.stopPropagation();
-  if (!confirm("この旅行をアーカイブに移動しますか？")) return;
-  try {
-    await db.collection("trips").doc(id).update({ archived: true });
-    // auto-open archive
-    if (!archiveOpen) toggleArchive();
-  } catch(e) { alert("失敗: "+e.message); }
-}
-
-async function unarchiveTrip(id, e) {
-  e.stopPropagation();
-  try { await db.collection("trips").doc(id).update({ archived: false }); }
-  catch(e) { alert("失敗: "+e.message); }
-}
-
-async function deleteTrip(id, e) {
-  e.stopPropagation();
-  if (!confirm("この旅行を削除しますか？")) return;
-  try { await db.collection("trips").doc(id).delete(); } catch(e) { alert("削除失敗: "+e.message); }
-}
+async function archiveTrip(id,e) { e.stopPropagation(); if(!confirm("アーカイブに移動しますか？"))return; try{await db.collection("trips").doc(id).update({archived:true}); if(!archiveOpen)toggleArchive();}catch(e){alert("失敗: "+e.message);} }
+async function unarchiveTrip(id,e) { e.stopPropagation(); try{await db.collection("trips").doc(id).update({archived:false});}catch(e){alert("失敗: "+e.message);} }
+async function deleteTrip(id,e) { e.stopPropagation(); if(!confirm("削除しますか？"))return; try{await db.collection("trips").doc(id).delete();}catch(e){alert("削除失敗: "+e.message);} }
 
 // ===== DETAIL =====
 function showDetail(id) {
-  currentTripId = id; currentDayIdx = 0;
-  if (unsubscribeTrips) { unsubscribeTrips(); unsubscribeTrips = null; }
-  document.getElementById('homeScreen').style.display = 'none';
+  currentTripId=id; currentDayIdx=0;
+  if(unsubscribeTrips){unsubscribeTrips();unsubscribeTrips=null;}
+  document.getElementById('homeScreen').style.display='none';
   document.getElementById('detailScreen').classList.add('visible');
   startDetailListener();
 }
-
 function startDetailListener() {
-  if (unsubscribeDetail) unsubscribeDetail();
+  if(unsubscribeDetail)unsubscribeDetail();
   unsubscribeDetail = db.collection("trips").doc(currentTripId).onSnapshot(doc => {
-    if (!doc.exists) { showHome(); return; }
-    currentTripData = doc.data();
-    setSyncBadge('✅ 同期済', 'green');
-    updateDetailUI();
-    renderTabs(); renderPlans();
-  }, err => { setSyncBadge('⚠️ エラー','yellow'); });
+    if(!doc.exists){showHome();return;}
+    currentTripData=doc.data();
+    setSyncBadge('✅ 同期済','green');
+    updateDetailUI(); renderTabs(); renderPlans();
+  }, err=>{setSyncBadge('⚠️ エラー','yellow');});
 }
-
 function updateDetailUI() {
-  const isArchived = currentTripData.archived === true;
-  // header color
-  document.getElementById('detailHeader').className = 'detail-header' + (isArchived ? ' archived-header' : '');
-  // archive button label
-  document.getElementById('archiveBtnDetail').textContent = isArchived ? '↩️ 解除' : '📦';
-  document.getElementById('archiveBtnDetail').title = isArchived ? 'アーカイブを解除' : 'アーカイブに移動';
-  // input form & edit
-  const archived = isArchived;
-  document.getElementById('inputFormWrapper').style.display = archived ? 'none' : '';
-  document.getElementById('dayFooter').style.display = archived ? 'none' : '';
-  document.getElementById('addDayBtn').style.display = archived ? 'none' : '';
-  document.getElementById('editBtnDetail').style.display = archived ? 'none' : '';
-  document.getElementById('archivedNotice').style.display = archived ? '' : 'none';
+  const isArchived=currentTripData.archived===true;
+  document.getElementById('detailHeader').className='detail-header'+(isArchived?' archived-header':'');
+  document.getElementById('archiveBtnDetail').textContent=isArchived?'↩️ 解除':'📦';
+  document.getElementById('inputFormWrapper').style.display=isArchived?'none':'';
+  document.getElementById('dayFooter').style.display=isArchived?'none':'';
+  document.getElementById('addDayBtn').style.display=isArchived?'none':'';
+  document.getElementById('editBtnDetail').style.display=isArchived?'none':'';
+  document.getElementById('archivedNotice').style.display=isArchived?'':'none';
+  document.getElementById('dayDateBar').style.display='';
+  document.getElementById('dayDateEditBtn').style.display=isArchived?'none':'';
 }
-
 async function toggleArchiveFromDetail() {
-  const isArchived = currentTripData.archived === true;
-  const msg = isArchived ? "アーカイブを解除しますか？" : "この旅行をアーカイブに移動しますか？";
-  if (!confirm(msg)) return;
-  try {
-    await db.collection("trips").doc(currentTripId).update({ archived: !isArchived });
-  } catch(e) { alert("失敗: "+e.message); }
+  const isArchived=currentTripData.archived===true;
+  if(!confirm(isArchived?"アーカイブを解除しますか？":"アーカイブに移動しますか？"))return;
+  try{await db.collection("trips").doc(currentTripId).update({archived:!isArchived});}
+  catch(e){alert("失敗: "+e.message);}
 }
 
 function renderTabs() {
-  document.getElementById('displayTripName').textContent = currentTripData.name;
-  document.getElementById('tripDateRange').textContent = currentTripData.dateRange || '期間未設定';
-  const container = document.getElementById('dayTabs');
-  container.innerHTML = '';
-  currentTripData.days.forEach((day, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'day-tab' + (i === currentDayIdx ? ' active' : '');
-    btn.textContent = `DAY ${i+1}`;
-    btn.onclick = () => { currentDayIdx = i; renderTabs(); renderPlans(); };
+  document.getElementById('displayTripName').textContent=currentTripData.name;
+  document.getElementById('tripDateRange').textContent=currentTripData.dateRange||'期間未設定';
+  const container=document.getElementById('dayTabs');
+  container.innerHTML='';
+  currentTripData.days.forEach((day,i)=>{
+    const btn=document.createElement('button');
+    btn.className='day-tab'+(i===currentDayIdx?' active':'');
+    const dateStr=day.date?formatDateJa(day.date).replace(/（.*）/,''):'';
+    btn.innerHTML=`<div class="day-tab-label">DAY ${i+1}</div>${dateStr?`<div class="day-tab-date">${dateStr}</div>`:''}`;
+    btn.onclick=()=>{currentDayIdx=i;renderTabs();renderPlans();updateDayDateBar();};
     container.appendChild(btn);
   });
+  updateDayDateBar();
+}
+function updateDayDateBar() {
+  const day=currentTripData.days[currentDayIdx];
+  if(!day)return;
+  document.getElementById('dayDateLabel').textContent=day.date?`📅 ${formatDateJa(day.date)}`:'📅 日付未設定';
 }
 
 function renderPlans() {
-  const list = document.getElementById('planList');
-  list.innerHTML = '';
-  const day = currentTripData.days[currentDayIdx];
-  if (!day) return;
-  const isArchived = currentTripData.archived === true;
-  if (!day.plans || !day.plans.length) {
-    list.innerHTML = '<div class="empty-state" style="padding:24px 16px"><div class="icon">📋</div><p>予定がまだありません</p></div>';
+  const list=document.getElementById('planList');
+  list.innerHTML='';
+  const day=currentTripData.days[currentDayIdx];
+  if(!day)return;
+  const isArchived=currentTripData.archived===true;
+  if(!day.plans||!day.plans.length){
+    list.innerHTML='<div class="empty-state" style="padding:24px 16px"><div class="icon">📋</div><p>予定がまだありません</p></div>';
     return;
   }
-  day.plans.forEach((p, idx) => {
-    const div = document.createElement('div');
-    div.className = 'plan-item';
-    div.innerHTML = `
+  day.plans.forEach((p,idx)=>{
+    const div=document.createElement('div');
+    div.className='plan-item';
+    const mapUrl=buildMapUrl(p.map);
+    const memoId=`memo_${idx}`;
+    const iconId=`memoIcon_${idx}`;
+    div.innerHTML=`
       <div class="plan-dot"></div>
       <div class="plan-card">
-        <div style="flex:1">
-          <div class="plan-time">${escapeHtml(p.time)}</div>
-          <div class="plan-task">${escapeHtml(p.task)}</div>
-          ${p.memo ? `<div class="plan-memo">${escapeHtml(p.memo)}</div>` : ''}
+        <div class="plan-card-top">
+          <div style="flex:1">
+            <div class="plan-time">${escapeHtml(p.time)}</div>
+            <div class="plan-task">${escapeHtml(p.task)}</div>
+          </div>
+          ${!isArchived?`<div class="plan-actions">
+            <button class="plan-edit-btn" onclick="openEditPlanModal(${idx})">✏️</button>
+            <button class="plan-delete" onclick="deletePlan(${idx})">✕</button>
+          </div>`:''}
         </div>
-        ${!isArchived ? `<button class="plan-delete" onclick="deletePlan(${idx})">✕</button>` : ''}
+        ${(p.url||mapUrl)?`<div class="plan-links">
+          ${p.url?`<a href="${escapeHtml(p.url)}" target="_blank" rel="noopener" class="plan-link-btn plan-link-url">🔗 リンクを開く</a>`:''}
+          ${mapUrl?`<a href="${escapeHtml(mapUrl)}" target="_blank" rel="noopener" class="plan-link-btn plan-link-map">🗺️ 地図を見る</a>`:''}
+        </div>`:''}
+        ${p.memo?`<button class="plan-memo-toggle" onclick="toggleMemo('${memoId}','${iconId}')">
+          <span class="plan-memo-toggle-icon" id="${iconId}">▶</span> メモを見る
+        </button>
+        <div class="plan-memo-body" id="${memoId}">${escapeHtml(p.memo)}</div>`:''}
       </div>`;
     list.appendChild(div);
   });
 }
 
+function toggleMemo(memoId, iconId) {
+  const body=document.getElementById(memoId);
+  const icon=document.getElementById(iconId);
+  body.classList.toggle('open');
+  icon.classList.toggle('open');
+}
+
 async function addPlan() {
-  const time = document.getElementById('planTime').value;
-  const task = document.getElementById('planTask').value.trim();
-  const memo = document.getElementById('planMemo').value.trim();
-  if (!time || !task) { alert("時間と予定を入力してください"); return; }
-  const newDays = JSON.parse(JSON.stringify(currentTripData.days));
-  newDays[currentDayIdx].plans.push({ time, task, memo });
-  newDays[currentDayIdx].plans.sort((a,b) => a.time.localeCompare(b.time));
+  const time=document.getElementById('planTime').value;
+  const task=document.getElementById('planTask').value.trim();
+  const url=document.getElementById('planUrl').value.trim();
+  const map=document.getElementById('planMap').value.trim();
+  const memo=document.getElementById('planMemo').value.trim();
+  if(!time||!task){alert("時間と予定を入力してください");return;}
+  const newDays=JSON.parse(JSON.stringify(currentTripData.days));
+  newDays[currentDayIdx].plans.push({time,task,url,map,memo});
+  newDays[currentDayIdx].plans.sort((a,b)=>a.time.localeCompare(b.time));
   try {
     setSyncBadge('⏳ 保存中','yellow');
-    await db.collection("trips").doc(currentTripId).update({ days: newDays });
-    document.getElementById('planTime').value = '';
-    document.getElementById('planTask').value = '';
-    document.getElementById('planMemo').value = '';
+    await db.collection("trips").doc(currentTripId).update({days:newDays});
+    document.getElementById('planTime').value='';
+    document.getElementById('planTask').value='';
+    document.getElementById('planUrl').value='';
+    document.getElementById('planMap').value='';
+    document.getElementById('planMemo').value='';
     setSyncBadge('✅ 同期済','green');
-  } catch(e) { alert("保存失敗: "+e.message); setSyncBadge('⚠️ エラー','yellow'); }
+  } catch(e){alert("保存失敗: "+e.message);setSyncBadge('⚠️ エラー','yellow');}
 }
 
 async function deletePlan(idx) {
-  if (!confirm("この予定を削除しますか？")) return;
-  const newDays = JSON.parse(JSON.stringify(currentTripData.days));
-  newDays[currentDayIdx].plans.splice(idx, 1);
-  try { await db.collection("trips").doc(currentTripId).update({ days: newDays }); } catch(e) { alert("削除失敗"); }
+  if(!confirm("この予定を削除しますか？"))return;
+  const newDays=JSON.parse(JSON.stringify(currentTripData.days));
+  newDays[currentDayIdx].plans.splice(idx,1);
+  try{await db.collection("trips").doc(currentTripId).update({days:newDays});}catch(e){alert("削除失敗");}
 }
 
 async function addNewDay() {
-  const newDays = JSON.parse(JSON.stringify(currentTripData.days));
-  newDays.push({ title: '', plans: [] });
-  try {
-    await db.collection("trips").doc(currentTripId).update({ days: newDays });
-    currentDayIdx = newDays.length - 1;
-  } catch(e) { alert("追加失敗"); }
+  const newDays=JSON.parse(JSON.stringify(currentTripData.days));
+  const prevDate=newDays[newDays.length-1].date;
+  let nextDate='';
+  if(prevDate){const d=new Date(prevDate);d.setDate(d.getDate()+1);nextDate=d.toISOString().split('T')[0];}
+  newDays.push({title:'',date:nextDate,plans:[]});
+  try{await db.collection("trips").doc(currentTripId).update({days:newDays});currentDayIdx=newDays.length-1;}
+  catch(e){alert("追加失敗");}
 }
 
 async function deleteDay() {
-  if (currentTripData.days.length <= 1) { alert("最低1日は必要です"); return; }
-  if (!confirm("この日を削除しますか？")) return;
-  const newDays = JSON.parse(JSON.stringify(currentTripData.days));
-  newDays.splice(currentDayIdx, 1);
-  currentDayIdx = Math.max(0, currentDayIdx - 1);
-  try { await db.collection("trips").doc(currentTripId).update({ days: newDays }); } catch(e) { alert("削除失敗"); }
+  if(currentTripData.days.length<=1){alert("最低1日は必要です");return;}
+  if(!confirm("この日を削除しますか？"))return;
+  const newDays=JSON.parse(JSON.stringify(currentTripData.days));
+  newDays.splice(currentDayIdx,1);
+  currentDayIdx=Math.max(0,currentDayIdx-1);
+  try{await db.collection("trips").doc(currentTripId).update({days:newDays});}catch(e){alert("削除失敗");}
 }
 
-function escapeHtml(str) {
-  if (!str) return '';
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-window.addEventListener('load', () => { showHome(); });
+window.addEventListener('load',()=>{showHome();});
 </script>
 </body>
 </html>
